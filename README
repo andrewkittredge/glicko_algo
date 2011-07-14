@@ -1,7 +1,7 @@
 A character for character copy of Mark Glickman's algorithm for computing change in a competitor's ranking based their performance against opponents of varying strength. 
 
 
-The algorithm is described in Gliman's paper The Glicko System, from http://www.glicko.net/glicko.html.
+The algorithm is described in Glickman's paper The Glicko System, from http://www.glicko.net/glicko.html.
 
 
 Andrew Kittredge
