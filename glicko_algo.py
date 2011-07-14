@@ -1,5 +1,11 @@
 #! /usr/bin/python
 
+'''
+Implementation of Mark Glickman's Glicko System.
+
+akittredge, July 2011
+'''
+
 import math
 
 Q = (math.log(10.0) / 400.0)
