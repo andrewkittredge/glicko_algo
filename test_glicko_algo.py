@@ -50,16 +50,17 @@ class TestGlickoAlgo(unittest.TestCase):
 
         self.assertAlmostEqual(d_squared, 53670.85, places=-3)
 
-    def test_post_period_rating(self):
+    def test_post_period_results(self):
 
         make_match = lambda item : {'opponent': item[0],
                                                     'result': item[1]}
 
         matches = map(make_match, zip(self.opponents, (1, 0, 0)))
 
-        post_rating = post_period_rating(self.player, matches)
+        post_results = post_period_results(self.player, matches)
 
-        self.assertAlmostEquals(post_rating, 1464.0, places=0)
+        self.assertAlmostEquals(post_results['rating'], 1464.0, places=0)
+        self.assertAlmostEquals(post_results['deviation'], 151.4, places=0)
 
 if __name__ == '__main__':
     unittest.main()

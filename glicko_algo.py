@@ -39,12 +39,14 @@ def dd(player, other_players):
     return 1 / (QQ * _sum)
 
 
-def post_period_rating(player, matches):
+def post_period_results(player, matches):
 
 
     d_squared = dd(player, (match['opponent'] for match in matches))
 
-    factor = Q / (1  / player.rating_deviation ** 2 + (1 / d_squared))
+    denominator = (1  / player.rating_deviation ** 2 + (1 / d_squared))
+    factor = Q / denominator
+    new_deviation = math.sqrt(1 / denominator)
 
     _sum = 0
     for match in matches:
@@ -59,7 +61,8 @@ def post_period_rating(player, matches):
         _sum +=  g_func_val * (match_result - expected_result)
 
 
-    return player.rating + factor * _sum
+    return {'rating' : player.rating + factor * _sum,
+            'deviation' : new_deviation }
 
 class Player(object):
     def __init__(self, rating, rating_deviation):
