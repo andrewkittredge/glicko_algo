@@ -1,5 +1,5 @@
-#! /usr/bin/python
- 
+#! /usr/bin/python2
+
 
 import unittest
 from glicko_algo import *
@@ -13,8 +13,8 @@ class TestGlickoAlgo(unittest.TestCase):
         self.opponent_2 = Player(1550.0, 100.0)
         self.opponent_3 = Player(1700.0, 300)
         self.opponents = (
-                        self.opponent_1, 
-                        self.opponent_2, 
+                        self.opponent_1,
+                        self.opponent_2,
                         self.opponent_3
                         )
 
@@ -34,15 +34,15 @@ class TestGlickoAlgo(unittest.TestCase):
         self.assertAlmostEqual(expected_outcome_opponent_1,
                                .639,
                                places=3)
-        
+
         expected_outcome_opponent_3 = expected_outcome_given_ratings(
                                     1500,
                                     self.opponent_3.rating,
                                     self.opponent_3.rating_deviation
                                     )
 
-        self.assertAlmostEqual(expected_outcome_opponent_3, 
-                               .303, 
+        self.assertAlmostEqual(expected_outcome_opponent_3,
+                               .303,
                                places=3)
 
     def test_d_squared(self):

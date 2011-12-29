@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python2
 
 '''
 Implementation of Mark Glickman's Glicko System.
@@ -11,12 +11,13 @@ import math
 Q = (math.log(10.0) / 400.0)
 QQ = Q ** 2
 pi = math.pi
-    
-def expected_outcome_given_ratings(player_rating, 
-                                   other_player_rating, 
+
+def expected_outcome_given_ratings(player_rating,
+                                   other_player_rating,
                                    other_player_rating_deviation):
 
-    exponent = -g_func(other_player_rating_deviation) * (player_rating - other_player_rating) / 400.0
+    exponent = -g_func(other_player_rating_deviation) * \
+        (player_rating - other_player_rating) / 400.0
     ret_val = 1 / (1 + 10 ** exponent)
 
     return ret_val
@@ -30,16 +31,16 @@ def dd(player, other_players):
     for other_player in other_players:
         g_func_val = g_func(other_player.rating_deviation)
 
-        expected_outcome = expected_outcome_given_ratings(player.rating, 
-                                            other_player.rating, 
+        expected_outcome = expected_outcome_given_ratings(player.rating,
+                                            other_player.rating,
                                             other_player.rating_deviation)
 
         _sum += g_func_val**2 * expected_outcome * (1 - expected_outcome)
     return 1 / (QQ * _sum)
 
-    
+
 def post_period_rating(player, matches):
-    
+
 
     d_squared = dd(player, (match['opponent'] for match in matches))
 
@@ -50,8 +51,8 @@ def post_period_rating(player, matches):
         opponent_rating = match['opponent'].rating
         opponent_rating_deviation = match['opponent'].rating_deviation
         match_result = match['result']
-        expected_result = expected_outcome_given_ratings(player.rating, 
-                                                 opponent_rating, 
+        expected_result = expected_outcome_given_ratings(player.rating,
+                                                 opponent_rating,
                                                  opponent_rating_deviation)
 
         g_func_val = g_func(opponent_rating_deviation)
@@ -62,5 +63,5 @@ def post_period_rating(player, matches):
 
 class Player(object):
     def __init__(self, rating, rating_deviation):
-        self.rating = rating    
+        self.rating = rating
         self.rating_deviation = rating_deviation
